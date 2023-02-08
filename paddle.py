@@ -1,16 +1,10 @@
-from turtle import Turtle
-import time
-WIDTH = 800
-HEIGHT = 600
-PADDLE_POSITION_RIGHT = WIDTH/2 - 30
-PADDLE_POSITION_LEFT = -WIDTH/2 + 30
-SPEED = 0.05
-STEPS = 20
+from env import *
 
 
 class Paddle(Turtle):
 
     def __init__(self, player):
+        self.steps = 20
         super().__init__(shape="square")
         self.color("white")
         self.penup()
@@ -21,9 +15,15 @@ class Paddle(Turtle):
         self.goto(x=PADDLE_POSITION_RIGHT, y=0)
 
     def up(self):
-        new_y = self.ycor() + STEPS
+        new_y = self.ycor() + self.steps
         self.sety(y=new_y)
 
     def down(self):
-        new_y = self.ycor() - STEPS
+        new_y = self.ycor() - self.steps
         self.sety(y=new_y)
+
+    def increase_speed(self):
+        self.steps = self.steps + 10
+
+    def reset_speed(self):
+        self.steps = STEPS
